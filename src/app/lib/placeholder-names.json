@@ -1,0 +1,9 @@
+[
+    {"name": "Red Dead Redemption 2", 
+    "description": "This is a great game about coowboys",
+    "image":"/rdr2placeholder.jpeg",
+    "progress": 50},
+    {"name": "Horizon Zero Dawn",
+    "description": "This is a great game about robot dinosaurs",
+    "image":"/horizonplaceholder.jpg"}
+]

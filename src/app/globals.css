@@ -18,16 +18,25 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  
+  
+}
+
+#content-container {
+  padding-right: 10px;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.nav-link{
+  color: #dce0e3 !important;
+}
+
+.progress {
+  width: 500px;
+  height: 7px;
 }

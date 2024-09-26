@@ -1,38 +1,39 @@
-
 'use client';
 import React from "react";
-import {Navbar, Container, NavbarBrand, NavLink, Nav, Row, Col, InputGroup} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useRouter } from "next/navigation";
+import { FormControl, InputGroup, Button, Container } from "react-bootstrap";
 import InputGroupText from "react-bootstrap/esm/InputGroupText";
-import { FormControl, Button } from "react-bootstrap";
-import { signIn } from "next-auth/react";
-import Dashboard from "./dashboard/page";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 
 
 
 
+export default function Login() {
 
-export default function App() {
-
-    const router = useRouter();
-
-
-
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     
+    const onSubmit = (e: React.FormEvent) => {
+
+        e.preventDefault() // the default action that belongs to the event won't occur
+
+        signIn('credentials', {
+            username,
+            password,
+            callbackUrl: '/dashboard'
+        })
+       
+ 
+    }
+
 
 
 
     return (
-
-    
-      <main>
-        <Dashboard></Dashboard>
-      </main>
-
-
-       /*  <body className="bg-secondary" >
+        <body className="bg-secondary" >
 
         
 
@@ -49,14 +50,10 @@ export default function App() {
                 <FormControl type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}></FormControl>
             </InputGroup>
 
-            <Button type='submit' onClick={() => signIn('github')}> Login</Button>
+            <Button type='submit' onClick={onSubmit}> Login</Button>
 
         </Container>
 
-        </body> */
+        </body>
     )
-    
-
 }
-
-
