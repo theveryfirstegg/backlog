@@ -63,6 +63,10 @@ export async function PUT(req){
 
         const updateGameData = await Game.findOneAndUpdate({id : gameID}, {$set: {"progress": gameData}}) 
 
+        if(!updateGameData){
+            return NextResponse.json({message: 'This game is not in your library'}, {status: 201})
+        }
+
         return NextResponse.json({message: 'Game progress was edited', status: 201})
 
 

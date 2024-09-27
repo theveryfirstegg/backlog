@@ -1,18 +1,10 @@
 'use client'
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
-import Link from "next/link";
 import {
-  Navbar,
   Container,
-  NavbarBrand,
-  NavLink,
-  Nav,
   Row,
   Col,
-  Button,
-  NavItem,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProgressBar from "react-bootstrap/ProgressBar";
@@ -20,9 +12,7 @@ import SearchBar from "../components/SearchBar";
 import GameCard from "../components/GameCard";
 import { signOut, useSession, signIn } from "next-auth/react";
 import NavBar from "../components/NavBar";
-import { Pagination, Card, CardBody, CardTitle, CardText, Form, FormControl, FormLabel, FormGroup } from "react-bootstrap";
 import PaginationConfig from "../components/Pagination";
-import GameList from "../components/GameList";
 
 const getGames = async () => {
 
