@@ -1,8 +1,8 @@
 
 'use client'
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import NavBar from '../components/NavBar';
-import { Image, Badge, Card, CardImg, CardTitle, CardBody, CardText, Button, Tabs, Tab, Form, FormGroup, FormLabel, FormControl } from 'react-bootstrap';
+import { Image, Badge, Card, CardImg, CardTitle, CardBody, CardText, Button, Tabs, Tab, Form, FormGroup, FormLabel, FormControl, Modal, ModalBody, ModalHeader, ModalFooter, ModalTitle } from 'react-bootstrap';
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
@@ -27,9 +27,20 @@ export default function AboutGame() {
     const [game, setGame] = useState(startingGameData);
     const [filteredJSON, setFilteredJSON] = useState('')
 
+    //Modal values
+    const [show, setShow] = useState(false);
+    const [modalTitle, setModalTitle] = useState('')
+    const [modalMessage, setModalMessage] = useState('')
+
+
     const searchParam = useSearchParams(); 
     const id = searchParam.get("id");
     const [gameProgress, setGameProgress] = useState(0);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const messageChange = (newMessage : string) => setModalMessage(newMessage);
+    const titleChange = (newMessage : string) => setModalTitle(newMessage)
 
 
     const addGame = async () => {
@@ -46,7 +57,10 @@ export default function AboutGame() {
 
         else{
             const result = await res.json();
-            alert(result.message)
+            messageChange(result.message)
+            titleChange('Game added')
+            
+            handleShow()
         }
 
 
@@ -64,7 +78,10 @@ export default function AboutGame() {
 
         if(res.ok){
             const result = await res.json()
-            alert(result.message)
+            messageChange('This game was deleted from your library')
+            titleChange('Game deleted')
+            
+            handleShow()
             router.refresh()
         }
         else {
@@ -100,7 +117,11 @@ export default function AboutGame() {
 
     }
         else {
-            alert(`The value you have entered: ${gameProgress} is invalid`)
+            messageChange('The value you have entered is invalid')
+            titleChange('Error')
+
+            handleShow()
+
         }
     }
 
@@ -138,6 +159,7 @@ export default function AboutGame() {
 
 
     return (
+        <Suspense>
         <div>
             <NavBar></NavBar>
 
@@ -202,9 +224,27 @@ export default function AboutGame() {
 
             </div>
 
+            <Modal show={show} onHide={handleClose}>
+                <ModalHeader closeButton>
+                    <ModalTitle>{modalTitle}</ModalTitle>
+                </ModalHeader>
+
+                <ModalBody> {modalMessage} </ModalBody>
+
+                <ModalFooter>
+                    <Button variant="primary" onClick={handleClose}>Ok</Button>
+
+                </ModalFooter>
+            
+            </Modal>
+
+
+       
+
 
 
         </div>
+        </Suspense>
 
     )
 

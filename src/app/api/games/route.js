@@ -10,13 +10,13 @@ export async function POST(req){
        const existingGame = await Game.findOne({id: gameData.id})
 
         if(existingGame){
-            return NextResponse.json({message: "Game already in list"}, {status: 201})
+            return NextResponse.json({message: "This game is already in your list"}, {status: 201})
         }
 
 
         await Game.create(gameData)
 
-        return NextResponse.json({message: "Game created"}, {status: 201})
+        return NextResponse.json({message: "This game was addd to your list"}, {status: 201})
 
     } catch(error){
         return NextResponse.json({message: "Error"}, {status: 500})
@@ -42,7 +42,7 @@ export async function DELETE(req){
         const targetGame = await Game.findOneAndDelete({id: gameID})
 
         if(!targetGame){
-            return NextResponse.json({ message: "Game is not in your library" }, { status: 404 });
+            return NextResponse.json({ message: "This game is not in your library" }, { status: 404 });
         }
 
 
