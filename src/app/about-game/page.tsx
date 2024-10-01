@@ -8,7 +8,7 @@ import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
 
-export default function AboutGame() {
+const AboutGamePage = () => {
     const router = useRouter()
     
 
@@ -252,11 +252,13 @@ export default function AboutGame() {
 
 }
 
-export function AboutGamePage(){
-    return(
-        <Suspense>
-            <AboutGame></AboutGame>
+export default function AboutGame() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <AboutGamePage />
         </Suspense>
     )
-        
 }
+
+
+        
