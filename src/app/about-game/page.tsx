@@ -248,4 +248,15 @@ export default function AboutGame() {
 
     )
 
+    
+
+}
+
+export function AboutGamePage(){
+    return(
+        <Suspense>
+            <AboutGame></AboutGame>
+        </Suspense>
+    )
+        
 }
